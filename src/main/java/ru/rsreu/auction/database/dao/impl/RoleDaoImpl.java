@@ -23,12 +23,11 @@ public class RoleDaoImpl implements RoleDAO {
 
 
 	@Override
-	public List<Role> findByUserId(Long userId) {
-		ArrayList<Role> roles = new ArrayList<>();
-		String query = resourcer.getString("role.query.find.by.user.id");
+	public Optional<Role> findById(Long id) {
+		String query = resourcer.getString("role.query.find.by.id");
 
 		try (PreparedStatement statement = ConnectionPool.getConnection().prepareStatement(query)) {
-			statement.setLong(1, userId);
+			statement.setLong(1, id);
 
 			ResultSet resultSet = statement.executeQuery();
 
@@ -37,14 +36,12 @@ public class RoleDaoImpl implements RoleDAO {
 						resultSet.getLong("id"),
 						resultSet.getString("name")
 				);
-
-				roles.add(role);
+				return Optional.of(role);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		return roles;
+		return Optional.empty();
 	}
 
 	@Override

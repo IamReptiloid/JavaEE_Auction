@@ -27,6 +27,11 @@ public abstract class Rout {
 	}
 
 	public void redirect(String url) throws IOException {
-		response.sendRedirect(url);
+		String path = URLHelper.getPath(url);
+		response.sendRedirect(path);
+	}
+
+	public HttpServletRequest getRequest() {
+		return this.request;
 	}
 }

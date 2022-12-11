@@ -5,6 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RoleDAO {
-	List<Role> findByUserId(Long userId);
+	Optional<Role> findById(Long userId);
 	Optional<Role> findByName(String roleName);
 }

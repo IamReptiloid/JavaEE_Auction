@@ -23,4 +23,11 @@ public class FrontController extends HttpServlet {
 			throw new RuntimeException(e);
 		}
 	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Command command = SercheCommandHelper.getCommand(req);
+		command.init(getServletContext(), req, resp);
+		command.send();
+	}
 }
