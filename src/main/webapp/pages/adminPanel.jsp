@@ -4,7 +4,6 @@
     <title>First JSP App</title>
 </head>
 <body>
-    profile
-    <a href="/auction?command=adminPanel">aaa</a>
+    admin
 </body>
 </html>

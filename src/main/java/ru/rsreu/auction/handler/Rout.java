@@ -1,6 +1,6 @@
 package ru.rsreu.auction.handler;
 
-import ru.rsreu.auction.helper.URLHelper;
+import ru.rsreu.auction.enums.Pages;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public abstract class Rout {
-	private ServletContext context;
-	private HttpServletRequest request;
-	private HttpServletResponse response;
+	protected  ServletContext context;
+	protected  HttpServletRequest request;
+	protected  HttpServletResponse response;
 
 	public void init(ServletContext context, HttpServletRequest request, HttpServletResponse response) {
 		this.context = context;
@@ -20,18 +20,8 @@ public abstract class Rout {
 		this.response = response;
 	}
 
-	public void forward(String page) throws ServletException, IOException {
-		String path = URLHelper.getPath(page);
-		RequestDispatcher requestDispatcher = this.context.getRequestDispatcher(path);
+	public void forward(Pages page) throws ServletException, IOException {
+		RequestDispatcher requestDispatcher = this.context.getRequestDispatcher(page.getPage());
 		requestDispatcher.forward(request, response);
-	}
-
-	public void redirect(String url) throws IOException {
-		String path = URLHelper.getPath(url);
-		response.sendRedirect(path);
-	}
-
-	public HttpServletRequest getRequest() {
-		return this.request;
 	}
 }

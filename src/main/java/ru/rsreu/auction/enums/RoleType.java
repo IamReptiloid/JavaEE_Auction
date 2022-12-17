@@ -4,7 +4,7 @@ import ru.rsreu.auction.data.Role;
 import ru.rsreu.auction.database.dao.DAOFactory;
 
 public enum RoleType {
-	ADMIN("Admin"),
+	ADMINISTRATOR("Administrator"),
 	USER("User"),
 	MODERATOR("Moderator");
 

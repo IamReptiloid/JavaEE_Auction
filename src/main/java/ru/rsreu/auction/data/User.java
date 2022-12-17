@@ -3,7 +3,7 @@ package ru.rsreu.auction.data;
 import ru.rsreu.auction.enums.RoleType;
 
 public class User {
-	private long id;
+	private Integer id;
 	private String userName;
 	private String password;
 	private RoleType role;
@@ -12,7 +12,7 @@ public class User {
 
 	private boolean status = false;
 
-	public User(long id, String userName, String password, RoleType role, String name, int isBlocked) {
+	public User(Integer id, String userName, String password, RoleType role, String name, int isBlocked) {
 		this.id = id;
 		this.userName = userName;
 		this.password = password;
@@ -21,15 +21,16 @@ public class User {
 		this.isBlocked = isBlocked;
 	}
 
-	public User(long id, String userName, String password, String name, int isBlocked) {
+	public User(Integer id, String userName, String password, String name, int isBlocked, RoleType role) {
 		this.id = id;
 		this.userName = userName;
 		this.password = password;
 		this.name = name;
 		this.isBlocked = isBlocked;
+		this.role = role;
 	}
 
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -53,7 +54,7 @@ public class User {
 		this.isBlocked = isBlocked;
 	}
 
-	public long getId() {
+	public Integer getId() {
 		return id;
 	}
 

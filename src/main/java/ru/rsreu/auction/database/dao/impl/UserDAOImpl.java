@@ -5,10 +5,12 @@ import com.prutzkow.resourcer.Resourcer;
 import ru.rsreu.auction.data.User;
 import ru.rsreu.auction.database.ConnectionPool;
 import ru.rsreu.auction.database.dao.UserDAO;
+import ru.rsreu.auction.enums.RoleType;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.Optional;
 
 public class UserDAOImpl implements UserDAO {
@@ -32,11 +34,12 @@ public class UserDAOImpl implements UserDAO {
 
 			while (resultSet.next()) {
 				User user = new User(
-						resultSet.getLong("id"),
+						resultSet.getInt("id"),
 						resultSet.getString("username"),
 						resultSet.getString("password"),
 						resultSet.getString("name"),
-						resultSet.getInt("is_blocked")
+						resultSet.getInt("is_blocked"),
+						RoleType.valueOf(resultSet.getString("role").toUpperCase())
 				);
 				return Optional.of(user);
 			}

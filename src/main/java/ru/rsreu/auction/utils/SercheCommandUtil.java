@@ -1,4 +1,4 @@
-package ru.rsreu.auction.helper;
+package ru.rsreu.auction.utils;
 
 import ru.rsreu.auction.command.Command;
 import ru.rsreu.auction.command.UnknownCommand;
@@ -6,7 +6,7 @@ import ru.rsreu.auction.constant.GlobalConst;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class SercheCommandHelper {
+public class SercheCommandUtil {
 	public static String COMMAND_PATH_FORMAT = "ru.rsreu.auction.command.%sCommand";
 
 	public static Command getCommand(HttpServletRequest request) {

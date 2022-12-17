@@ -1,20 +1,26 @@
 package ru.rsreu.auction.filter;
 
+import ru.rsreu.auction.config.AuthConfig;
 import ru.rsreu.auction.constant.GlobalConst;
-import ru.rsreu.auction.data.User;
-import ru.rsreu.auction.helper.AppHelper;
-import ru.rsreu.auction.helper.AuthHelper;
-import ru.rsreu.auction.wrapper.UserRoleRequestWrapper;
+import ru.rsreu.auction.data.Session;
+import ru.rsreu.auction.enums.Pages;
+import ru.rsreu.auction.enums.Routes;
+import ru.rsreu.auction.service.ServiceFactory;
+import ru.rsreu.auction.service.SessionService;
+import ru.rsreu.auction.utils.AuthUtil;
+import ru.rsreu.auction.utils.UserUtil;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 public class AuthFilter implements Filter {
+	private SessionService sessionService;
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-
+		sessionService = ServiceFactory.getSessionService();
 	}
 
 	@Override
@@ -22,35 +28,25 @@ public class AuthFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-//		String param = request.getParameter(GlobalConst.PARAMS_PAGE);
-
-//		if (param.equals("login")) {
-//			System.out.println("login");
-//			filterChain.doFilter(request, response);
-//			return;
-//		}
-
-		User user = AppHelper.getLoginUser(request.getSession());
-		HttpServletRequest wrapRequest = request;
-
-		if(user != null) {
-			wrapRequest = new UserRoleRequestWrapper(user, user.getRole(), request);
-		}
-
-		if(AuthHelper.isSecurity(wrapRequest)) {
-			if(user == null) {
-				response.sendRedirect("/auction?command=login");
-			}
-
-			boolean hasPermission = AuthHelper.hasPermission(wrapRequest, user.getRole());
-
-			if(!hasPermission) {
-				response.sendRedirect("/auction?command=profile");
+		Optional<Integer> userId = UserUtil.getUserIdFromCookies(request.getCookies());
+		Optional<Session> session = userId.isPresent()
+				? sessionService.getSession(userId.get())
+				: Optional.empty();
+		//TODO
+		if(!session.isPresent() || (AuthUtil.isSecurity(request) && !AuthUtil.hasPermission(request, session.get().getUser().getRole()))){
+			String path = request.getParameter(GlobalConst.PARAMS_PAGE);
+			if (path.contains(Routes.LOGIN.getName())) {
+				filterChain.doFilter(request, response);
 				return;
 			}
+			if(session.isPresent()) {
+				response.sendRedirect(AuthConfig.getStartPage(session.get().getUser().getRole()).getPage().getPage());
+				return;
+			}
+			response.sendRedirect(Pages.LOGIN.getPage());
+			return;
 		}
-
-		filterChain.doFilter(wrapRequest, response);
+		response.sendRedirect(AuthConfig.getStartPage(session.get().getUser().getRole()).getPage().getPage());
 	}
 
 	@Override
