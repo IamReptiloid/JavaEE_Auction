@@ -7,4 +7,6 @@ public class ServiceFactory {
 	public static SessionService getSessionService() {
 		return new SessionService();
 	}
+
+	public static AuctionService getAuctionService() {return new AuctionService(); }
 }

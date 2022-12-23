@@ -1,5 +1,6 @@
 package ru.rsreu.auction.database.dao;
 
+import ru.rsreu.auction.database.dao.impl.AuctionDAOImpl;
 import ru.rsreu.auction.database.dao.impl.RoleDaoImpl;
 import ru.rsreu.auction.database.dao.impl.SessionDAOImpl;
 import ru.rsreu.auction.database.dao.impl.UserDAOImpl;
@@ -19,4 +20,6 @@ public class DAOFactory {
 	public static SessionDAO getSessionDAO() {
 		return SessionDAOImpl.getInstance();
 	}
+
+    public static AuctionDAO getAuctionDAO() { return AuctionDAOImpl.getInstance(); }
 }

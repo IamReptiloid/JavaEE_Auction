@@ -19,6 +19,7 @@ public class AuthConfig {
 	private static void init() {
 		ArrayList<Routes> userUrlPatterns = new ArrayList<>();
 		userUrlPatterns.add(Routes.PROFILE);
+		userUrlPatterns.add(Routes.AUCTION);
 
 		mapConfig.put(RoleType.USER, userUrlPatterns);
 
