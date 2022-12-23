@@ -6,7 +6,8 @@ public enum Routes {
 	ERROR("error"),
 	ADMIN_PANEL("admin_panel"),
 	PROFILE("profile"),
-    AUCTION("auction");
+    AUCTION("auction"),
+	LOTS_USER("lots_user");
 
 	private String rout;
 	Routes(String page) {

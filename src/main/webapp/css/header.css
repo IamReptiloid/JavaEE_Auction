@@ -1,0 +1,24 @@
+.userHeader {
+    background-color: #C618FF;
+    position: sticky;
+    top: 0;
+    display: flex;
+    padding: 8px;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.headerUser__name {
+    color: white;
+    font-size: 20px;
+}
+
+.bottom_auction {
+    flex-grow: 2;
+    margin-left: 10px;
+}
+
+.bottom {
+    margin: 0 5px 0 5px;
+}

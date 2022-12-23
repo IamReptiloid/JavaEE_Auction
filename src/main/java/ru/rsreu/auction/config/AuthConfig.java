@@ -20,11 +20,12 @@ public class AuthConfig {
 		ArrayList<Routes> userUrlPatterns = new ArrayList<>();
 		userUrlPatterns.add(Routes.PROFILE);
 		userUrlPatterns.add(Routes.AUCTION);
+		userUrlPatterns.add(Routes.LOTS_USER);
 
 		mapConfig.put(RoleType.USER, userUrlPatterns);
 
 		ArrayList<Routes> adminUrlPatterns = new ArrayList<>();
-		userUrlPatterns.add(Routes.ADMIN_PANEL);
+		adminUrlPatterns.add(Routes.ADMIN_PANEL);
 		mapConfig.put(RoleType.ADMINISTRATOR, adminUrlPatterns);
 
 		startPage.put(RoleType.USER, Routes.PROFILE);

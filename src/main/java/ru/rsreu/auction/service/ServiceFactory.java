@@ -9,4 +9,5 @@ public class ServiceFactory {
 	}
 
 	public static AuctionService getAuctionService() {return new AuctionService(); }
+	public static LotService getLotService() {return new LotService(); }
 }

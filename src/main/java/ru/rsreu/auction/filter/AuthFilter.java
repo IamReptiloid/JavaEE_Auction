@@ -32,21 +32,28 @@ public class AuthFilter implements Filter {
 		Optional<Session> session = userId.isPresent()
 				? sessionService.getSession(userId.get())
 				: Optional.empty();
-		//TODO
-		if(!session.isPresent() || (AuthUtil.isSecurity(request) && !AuthUtil.hasPermission(request, session.get().getUser().getRole()))){
+		if(!session.isPresent()){
 			String path = request.getParameter(GlobalConst.PARAMS_PAGE);
 			if (path.contains(Routes.LOGIN.getName())) {
 				filterChain.doFilter(request, response);
 				return;
 			}
-			if(session.isPresent()) {
-				response.sendRedirect(AuthConfig.getStartPage(session.get().getUser().getRole()).getPage().getPage());
-				return;
-			}
 			response.sendRedirect(Pages.LOGIN.getPage());
 			return;
 		}
-//		response.sendRedirect(AuthConfig.getStartPage(session.get().getUser().getRole()).getPage().getPage());
+
+		//TODO
+		if((AuthUtil.isSecurity(request) && !AuthUtil.hasPermission(request, session.get().getUser().getRole()))) {
+			response.sendRedirect(AuthConfig.getStartPage(session.get().getUser().getRole()).getPage().getPage());
+			return;
+		}
+
+		String path = request.getParameter(GlobalConst.PARAMS_PAGE);
+		if (path.contains(Routes.LOGIN.getName())) {
+			response.sendRedirect(AuthConfig.getStartPage(session.get().getUser().getRole()).getPage().getPage());
+			return;
+		}
+
         filterChain.doFilter(request, response);
 	}
 
