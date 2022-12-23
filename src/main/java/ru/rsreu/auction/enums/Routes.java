@@ -5,7 +5,9 @@ public enum Routes {
 	LOGOUT("logout"),
 	ERROR("error"),
 	ADMIN_PANEL("admin_panel"),
-	PROFILE("profile");
+	PROFILE("profile"),
+    AUCTION("auction");
+
 	private String rout;
 	Routes(String page) {
 		this.rout = page;

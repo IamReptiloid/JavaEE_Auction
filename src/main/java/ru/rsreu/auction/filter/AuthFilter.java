@@ -46,7 +46,8 @@ public class AuthFilter implements Filter {
 			response.sendRedirect(Pages.LOGIN.getPage());
 			return;
 		}
-		response.sendRedirect(AuthConfig.getStartPage(session.get().getUser().getRole()).getPage().getPage());
+//		response.sendRedirect(AuthConfig.getStartPage(session.get().getUser().getRole()).getPage().getPage());
+        filterChain.doFilter(request, response);
 	}
 
 	@Override
