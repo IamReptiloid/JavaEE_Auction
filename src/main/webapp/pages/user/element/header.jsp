@@ -4,7 +4,7 @@
     <div class="headerUser__name">Auction</div>
     <div class="bottom_auction">
         <a class="bottom" href="/auction?command=auction">Все аукционы</a>
-        <a class="bottom" href="/auction?command=auction">Мои аукционы</a>
+        <a class="bottom" href="/auction?command=createdAuction">Мои аукционы</a>
     </div>
     <div>
         <a class="bottom" href="/auction?command=profile">Профиль</a>

@@ -5,6 +5,7 @@ public enum Pages {
 	ERROR("/pages/error.jsp"),
 	ADMIN_PANEL("/pages/adminPanel.jsp"),
 	PROFILE("/pages/user/profile.jsp"),
+	CREATED_AUCTION("/pages/user/createdAuctions.jsp"),
 	LOTS_USER("/pages/user/lots.jsp"),
 	AUCTION("/pages/user/auction.jsp");
 

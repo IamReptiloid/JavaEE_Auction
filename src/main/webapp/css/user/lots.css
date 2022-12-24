@@ -6,6 +6,7 @@
 }
 
 .lot {
+    width: 166px;
     display: flex;
     flex-direction: column;
     padding: 15px;
