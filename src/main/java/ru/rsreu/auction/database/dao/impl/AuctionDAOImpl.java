@@ -6,6 +6,7 @@ import ru.rsreu.auction.data.Auction;
 import ru.rsreu.auction.database.ConnectionPool;
 import ru.rsreu.auction.database.dao.AuctionDAO;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,15 +21,29 @@ public class AuctionDAOImpl implements AuctionDAO {
         resourcer = ProjectResourcer.getInstance();
     }
 
-    public static AuctionDAOImpl getInstance() {
-        if (instance == null){
-            synchronized (AuctionDAOImpl.class) {
-                if (instance == null) {
-                    instance = new AuctionDAOImpl();
-                }
+    @Override
+    public List<Auction> getAuctionByUserId(int id) {
+        String query = resourcer.getString("auction.get.auctions.by.user.id");
+        List<Auction> auctionList = new ArrayList<>();
+
+        try (PreparedStatement statement = ConnectionPool.getConnection().prepareStatement(query)) {
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                auctionList.add(new Auction(
+                        resultSet.getLong("id"),
+                        resultSet.getLong("id_creator"),
+                        resultSet.getString("description"),
+                        resultSet.getString("name"),
+                        resultSet.getString("status")
+                ));
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return instance;
+
+        return auctionList;
     }
 
     @Override
@@ -53,5 +68,30 @@ public class AuctionDAOImpl implements AuctionDAO {
         }
 
         return auctionList;
+    }
+
+    @Override
+    public void updateAuction(int id, String name, String description, String status) {
+        String query = resourcer.getString("auction.update.by.id");
+        try (PreparedStatement statement = ConnectionPool.getConnection().prepareStatement(query)) {
+            statement.setString(1, description);
+            statement.setString(2, name);
+            statement.setString(3, status);
+            statement.setInt(4, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static AuctionDAOImpl getInstance() {
+        if (instance == null){
+            synchronized (AuctionDAOImpl.class) {
+                if (instance == null) {
+                    instance = new AuctionDAOImpl();
+                }
+            }
+        }
+        return instance;
     }
 }

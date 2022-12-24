@@ -7,6 +7,7 @@ public enum Routes {
 	ADMIN_PANEL("admin_panel"),
 	PROFILE("profile"),
     AUCTION("auction"),
+	CREATED_AUCTION("created_auction"),
 	LOTS_USER("lots_user");
 
 	private String rout;

@@ -5,6 +5,7 @@ import ru.rsreu.auction.data.User;
 import ru.rsreu.auction.database.dao.DAOFactory;
 import ru.rsreu.auction.database.dao.SessionDAO;
 import ru.rsreu.auction.database.dao.UserDAO;
+import ru.rsreu.auction.utils.UserUtil;
 
 import java.util.Date;
 import java.util.Optional;
