@@ -32,14 +32,9 @@ public class LotDAOImpl implements LotDAO {
 						new Lot(
 								resultSet.getLong("id"),
 								resultSet.getInt("price"),
-								resultSet.getTimestamp("closing_date"),
-								resultSet.getString("description"),
 								resultSet.getString("path_to_picture"),
-								resultSet.getInt("step"),
 								resultSet.getString("status"),
-								resultSet.getString("name"),
-								resultSet.getString("winner")
-
+								resultSet.getString("name")
 						)
 				);
 			}

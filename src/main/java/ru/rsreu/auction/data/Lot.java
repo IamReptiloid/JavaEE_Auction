@@ -25,6 +25,14 @@ public class Lot {
 		this.winner = winner;
 	}
 
+	public Lot(long id, int price, String pathToPicture, String status, String name) {
+		this.id = id;
+		this.price = price;
+		this.pathToPicture = pathToPicture;
+		this.status = status;
+		this.name = name;
+	}
+
 	public long getId() {
 		return id;
 	}
