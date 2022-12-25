@@ -17,10 +17,6 @@ ext {
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
-tasks.withType(JavaCompile) {
-  options.encoding = 'UTF-8'
-}
-
 dependencies {
   implementation 'javax.servlet:jstl:1.2'
   implementation 'com.oracle.database.jdbc:ojdbc8:21.7.0.0'

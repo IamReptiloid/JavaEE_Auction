@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class LotsCommand extends Command{
+public class LotsUserCommand extends Command{
 	private LotService lotService;
 	@Override
 	public void init(ServletContext context, HttpServletRequest request, HttpServletResponse response) {

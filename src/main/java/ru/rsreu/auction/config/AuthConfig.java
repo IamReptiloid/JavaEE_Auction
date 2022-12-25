@@ -21,6 +21,7 @@ public class AuthConfig {
 		userUrlPatterns.add(Routes.PROFILE);
 		userUrlPatterns.add(Routes.AUCTION);
 		userUrlPatterns.add(Routes.LOTS_USER);
+		userUrlPatterns.add(Routes.CREATED_AUCTION);
 
 		mapConfig.put(RoleType.USER, userUrlPatterns);
 

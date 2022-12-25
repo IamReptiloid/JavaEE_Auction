@@ -11,7 +11,7 @@ async function setListener() {
     const listener = async (event) => {
         // table.removeEventListener('click', listener);
         // TO DO
-        window.location.href = `http://localhost:8081/auction?command=lots&id=${event.target.dataset.id}`;
+        window.location.href = `http://localhost:8081/auction?command=lotsUser&id=${event.target.dataset.id}`;
     };
     table.addEventListener('click', listener);
 }
