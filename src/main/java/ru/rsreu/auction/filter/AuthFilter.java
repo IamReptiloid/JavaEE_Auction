@@ -42,14 +42,15 @@ public class AuthFilter implements Filter {
 			return;
 		}
 
+		String parameter = request.getParameter(GlobalConst.PARAMS_PAGE);
+
 		//TODO
-		if((AuthUtil.isSecurity(request) && !AuthUtil.hasPermission(request, session.get().getUser().getRole()))) {
+		if(!AuthUtil.hasPermission(parameter, session.get().getUser().getRole())) {
 			response.sendRedirect(AuthConfig.getStartPage(session.get().getUser().getRole()).getPage().getPage());
 			return;
 		}
 
-		String path = request.getParameter(GlobalConst.PARAMS_PAGE);
-		if (path.contains(Routes.LOGIN.getName())) {
+		if (parameter.contains(Routes.LOGIN.getName())) {
 			response.sendRedirect(AuthConfig.getStartPage(session.get().getUser().getRole()).getPage().getPage());
 			return;
 		}
