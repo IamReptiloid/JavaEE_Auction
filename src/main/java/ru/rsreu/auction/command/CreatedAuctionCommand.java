@@ -1,5 +1,6 @@
 package ru.rsreu.auction.command;
 
+import ru.rsreu.auction.dto.IdAuction;
 import ru.rsreu.auction.enums.Pages;
 import ru.rsreu.auction.service.AuctionService;
 import ru.rsreu.auction.service.ServiceFactory;
@@ -31,10 +32,11 @@ public class CreatedAuctionCommand extends Command{
 
 	@Override
 	public void send() throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
+		Optional<Integer> userIdFromCookies = UserUtil.getUserIdFromCookies(request.getCookies());
 		String status = request.getParameter("status");
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
-		auctionService.updateAuction(id, name, description, status);
+		int idLastAuction = auctionService.createAuction(userIdFromCookies.get(), name, description, status);
+		json(new IdAuction(idLastAuction));
 	}
 }

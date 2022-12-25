@@ -24,4 +24,10 @@ public class AuctionService {
     public void updateAuction(int id, String name, String description, String status) {
         auctionDAO.updateAuction(id, name, description, status);
     }
+
+    public int createAuction(int idCreator, String name, String description, String status) {
+        auctionDAO.createAuction(idCreator, name, description, status);
+        int idLastAuction = auctionDAO.getLastAuctionInsert();
+        return idLastAuction;
+    }
 }

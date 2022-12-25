@@ -7,6 +7,7 @@
     justify-content: space-between;
     align-items: center;
     color: white;
+    z-index: 10;
 }
 
 .headerUser__name {

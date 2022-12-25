@@ -27,6 +27,11 @@ public class AuctionCommand extends Command{
 
     @Override
     public void send() throws ServletException, IOException {
-
+        int id = Integer.parseInt(request.getParameter("id"));
+        String status = request.getParameter("status");
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        auctionService.updateAuction(id, name, description, status);
     }
+
 }

@@ -22,6 +22,36 @@ public class AuctionDAOImpl implements AuctionDAO {
     }
 
     @Override
+    public int getLastAuctionInsert() {
+        String query = resourcer.getString("auction.get.last.insert");
+
+        try (PreparedStatement statement = ConnectionPool.getConnection().prepareStatement(query)) {
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                return resultSet.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public void createAuction(int idCreator, String name, String description, String status) {
+        String query = resourcer.getString("auction.insert");
+        try (PreparedStatement statement = ConnectionPool.getConnection().prepareStatement(query)) {
+            statement.setInt(1, idCreator);
+            statement.setString(2, description);
+            statement.setString(3, name);
+            statement.setString(4, status);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public List<Auction> getAuctionByUserId(int id) {
         String query = resourcer.getString("auction.get.auctions.by.user.id");
         List<Auction> auctionList = new ArrayList<>();

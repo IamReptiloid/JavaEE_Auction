@@ -35,7 +35,7 @@
                             <input type="checkbox" class="checkbox">
                         </c:if>
                     </td>
-                    <td class="goTo"><button data-id="${i.getId()}">перейти</button></td>
+                    <td class="goTo"><button data-id="${i.getId()}">auction</button></td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -46,6 +46,7 @@
             <button class="send button">Отправить изменения</button>
         </div>
     </div>
+<%--    <%@include file="../../templates/script.jsp" %>--%>
     <script src="../../js/createdAuctions.js"></script>
 </body>
 </html>

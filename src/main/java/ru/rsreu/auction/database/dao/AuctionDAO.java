@@ -8,4 +8,6 @@ public interface AuctionDAO {
     List<Auction> getAllAuctions();
     List<Auction> getAuctionByUserId(int id);
     void updateAuction(int id, String name, String description, String status);
+    void createAuction(int idCreator, String name, String description, String status);
+    int getLastAuctionInsert();
 }
